@@ -1,0 +1,362 @@
+import pymysql
+import getpass
+
+mydb = pymysql.connect(
+  host="localhost",
+  user="root",
+  passwd="12345",
+  database="ss"
+)
+
+x = mydb.cursor()
+
+# x.execute("DROP TABLE IF EXISTS menu")
+# x.execute("DROP DATABASE IF EXISTS mydatabase ")
+# x.execute("CREATE DATABASE mydatabase")
+# x.execute("DROP TABLE IF EXISTS menu")
+# x.execute("CREATE  TABLE menu (")
+# x.execute("DROP TABLE IF EXISTS Menu")
+# 
+# x.execute("CREATE TABLE Menu ( Item_ID int NOT NULL AUTO_INCREMENT PRIMARY KEY, Item_name varchar(255), Cost_per_item int, Available_quantity int)")
+# 
+# m = "INSERT INTO Menu (Item_name, Cost_per_item, Available_quantity) VALUES (%s, %s, %s)"
+# # VALUES 
+# val = [
+#     ('Idli', 30, 50),
+#     ('Dosa', 60, 50),
+#     ('Paneer Butter Masala', 130, 20),
+#     ('Tawa Roti', 8, 500),
+#     ('Fried Rice', 80, 100),
+#     ('Veg Thali', 100, 53),
+#     ('Wada Paav', 12, 3),
+#     ('Ice Tea', 50, 5),
+#     ('Cappuccino', 60, 33),
+#     ('Cafe Latte', 80, 29)
+# ]
+# x.executemany(m,val)
+mydb.commit()
+x.execute("SELECT * FROM Menu")
+data = x.fetchall()
+
+# x.execute("DROP TABLE IF EXISTS Bill_history")
+# x.execute("CREATE TABLE Bill_history ( Serial_no int NOT NULL AUTO_INCREMENT UNIQUE, Name_of_customer varchar(50), total_amt int)")
+
+c=input("Enter choice (admin / customer) : ")
+if c=="customer":
+    name=input("Please enter your name : ")
+    
+    print(".....................Displaying Menu........................")
+    for i in data:
+        print(i)
+#     item=0
+    while True:
+        item=input("Enter item id : ")
+        
+#         qui=item
+        if item!=1:
+                if item!=2:
+                    if item!=3:
+                        if item!=4:
+                            if item!=5:
+                                if item!=6:                 #Boundary condition
+                                    if item!=7:
+                                        if item!=8:
+                                            if item!=9:
+                                                if item!=10:
+                                                    print("Invalid item id")
+                                                    
+        total=0
+        ite=int(item)
+        q=int(input("Enter quantity : "))
+        if q<=0:
+            print("Quantity cannot be less than or equal to zero")
+            
+        if ite==1:
+            if q<=50:
+                i1="SELECT * FROM Menu where Item_ID=1"
+                x.execute(i1)
+                r1=x.fetchone()
+                print(r1[3])
+                u1=r1[3] - q
+                print(u1)               #for item 1
+                zz=1
+    
+                pr=r1[2]*ite
+                total+=pr
+             
+#                 upd=f"UPDATE Menu SET Available_quantity={u1} WHERE Item_ID={1}"
+                upd = "UPDATE Menu SET Available_quantity='{}' WHERE Item_ID ='1'".format(u1)
+                x.execute(upd)
+                mydb.commit()
+                x.execute("SELECT * FROM Menu")
+                data = x.fetchall()
+                for i in data:
+                    print(i)
+                sql= "INSERT INTO Bill_history (Serial_no, Name_of_customer, total_amt int) VALUES ("
+            if q>50:
+                print("This much quantity is not available")
+                for i in data:
+                    print(i)
+        if ite==2:
+            if q<=50:
+                i1="SELECT * FROM Menu where Item_ID=2"
+                x.execute(i1)
+                r1=x.fetchone()
+                print(r1[3])
+                u1=r1[3] - q        #for item 2
+                print(u1)
+                pr=r1[2]*ite
+                total+=pr
+                 
+             
+#                 upd=f"UPDATE Menu SET Available_quantity={u1} WHERE Item_ID={1}"
+                upd = "UPDATE Menu SET Available_quantity='{}' WHERE Item_ID ='2'".format(u1)
+
+                x.execute(upd)
+                x.execute("SELECT * FROM Menu")
+                data = x.fetchall()
+                for i in data:
+                    print(i)
+                
+            if q>50:
+                print("This much quantity is not available")
+                for i in data:
+                    print(i)
+            
+        if ite ==3:
+            if q<=20:
+                i1="SELECT * FROM Menu where Item_ID=3"
+                x.execute(i1)
+                r1=x.fetchone()
+                print(r1[3])
+                u1=r1[3] - q
+                print(u1)                   #for item 3
+                pr=r1[2]*ite
+                total+=pr
+                 
+             
+#                 upd=f"UPDATE Menu SET Available_quantity={u1} WHERE Item_ID={1}"
+#                 upd="UPDATE Menu SET Available_quantity='u1' WHERE Item_ID = 1 "
+                upd = "UPDATE Menu SET Available_quantity='{}' WHERE Item_ID ='3'".format(u1)
+
+                x.execute(upd)
+                x.execute("SELECT * FROM Menu")
+                data = x.fetchall()
+                for i in data:
+                    print(i)
+                
+            if q>20:
+                print("This much quantity is not available")
+                for i in data:
+                    print(i)
+
+                        
+        if ite==4:      #for item 4
+            if q<=500:
+                i1="SELECT * FROM Menu where Item_ID=4"
+                x.execute(i1)
+                r1=x.fetchone()
+                print(r1[3])
+                u1=r1[3] - q
+                print(u1)
+                pr=r1[2]*ite
+                total+=pr
+                 
+             
+#                 upd=f"UPDATE Menu SET Available_quantity={u1} WHERE Item_ID={1}"
+#                 upd="UPDATE Menu SET Available_quantity='u1' WHERE Item_ID = 1 "
+                upd = "UPDATE Menu SET Available_quantity='{}' WHERE Item_ID ='4'".format(u1)
+
+                x.execute(upd)
+                x.execute("SELECT * FROM Menu")
+                data = x.fetchall()
+                for i in data:
+                    print(i)
+                
+            if q>500:
+                print("This much quantity is not available")
+                for i in data:
+                    print(i)
+             
+             
+             
+        if ite==5:          #for item 5
+            if q<=100:
+                i1="SELECT * FROM Menu where Item_ID=5"
+                x.execute(i1)
+                r1=x.fetchone()
+                print(r1[3])
+                u1=r1[3] - q
+                print(u1)
+                pr=r1[2]*ite
+                total+=pr
+                 
+             
+#                 upd=f"UPDATE Menu SET Available_quantity={u1} WHERE Item_ID={1}"
+#                 upd="UPDATE Menu SET Available_quantity='u1' WHERE Item_ID = 1 "
+                upd = "UPDATE Menu SET Available_quantity='{}' WHERE Item_ID ='5'".format(u1)
+
+                x.execute(upd)
+                x.execute("SELECT * FROM Menu")
+                data = x.fetchall()
+                for i in data:
+                    print(i)
+                
+            if q>100:
+                print("This much quantity is not available")
+                for i in data:
+                    print(i)
+             
+             
+        if ite==6:          #for item 6
+            if q<=53:
+                i1="SELECT * FROM Menu where Item_ID=6"
+                x.execute(i1)
+                r1=x.fetchone()
+                print(r1[3])
+                u1=r1[3] - q
+                print(u1)
+                pr=r1[2]*ite
+                total+=pr
+             
+#                 upd=f"UPDATE Menu SET Available_quantity={u1} WHERE Item_ID={1}"
+#                 upd="UPDATE Menu SET Available_quantity='u1' WHERE Item_ID = 1 "
+                upd = "UPDATE Menu SET Available_quantity='{}' WHERE Item_ID ='6'".format(u1)
+
+                x.execute(upd)
+                x.execute("SELECT * FROM Menu")
+                data = x.fetchall()
+                for i in data:
+                    print(i)
+                
+            if q>53:
+                print("This much quantity is not available")
+                for i in data:
+                    print(i)  
+             
+        if ite==7:          #for item 7
+            if q<=3:
+                i1="SELECT * FROM Menu where Item_ID=7"
+                x.execute(i1)
+                r1=x.fetchone()
+                print(r1[3])
+                u1=r1[3] - q
+                print(u1)
+                pr=r1[2]*ite
+                total+=pr
+                 
+             
+#                 upd=f"UPDATE Menu SET Available_quantity={u1} WHERE Item_ID={1}"
+#                 upd="UPDATE Menu SET Available_quantity='u1' WHERE Item_ID = 1 "
+                upd = "UPDATE Menu SET Available_quantity='{}' WHERE Item_ID ='7'".format(u1)
+
+                x.execute(upd)
+                x.execute("SELECT * FROM Menu")
+                data = x.fetchall()
+                for i in data:
+                    print(i)
+                
+            if q>3:
+                print("This much quantity is not available")
+                for i in data:
+                    print(i)
+             
+        if ite==8:          #for item 8
+            if q<=5:
+                i1="SELECT * FROM Menu where Item_ID=8"
+                x.execute(i1)
+                r1=x.fetchone()
+                print(r1[3])
+                u1=r1[3] - q
+                print(u1)
+                pr=r1[2]*ite
+                total+=pr
+                 
+             
+#                 upd=f"UPDATE Menu SET Available_quantity={u1} WHERE Item_ID={1}"
+#                 upd="UPDATE Menu SET Available_quantity='u1' WHERE Item_ID = 1 "
+                upd = "UPDATE Menu SET Available_quantity='{}' WHERE Item_ID ='8'".format(u1)
+
+                x.execute(upd)
+                x.execute("SELECT * FROM Menu")
+                data = x.fetchall()
+                for i in data:
+                    print(i)
+                
+            if q>5:
+                print("This much quantity is not available")
+                for i in data:
+                    print(i)
+             
+        if ite==9:      #for item 9
+            if q<=33:
+                i1="SELECT * FROM Menu where Item_ID=9"
+                x.execute(i1)
+                r1=x.fetchone()
+                print(r1[3])
+                u1=r1[3] - q
+                print(u1)
+                pr=r1[2]*ite
+                total+=pr
+                 
+             
+#                 upd=f"UPDATE Menu SET Available_quantity={u1} WHERE Item_ID={1}"
+#                 upd="UPDATE Menu SET Available_quantity='u1' WHERE Item_ID = 1 "
+                upd = "UPDATE Menu SET Available_quantity='{}' WHERE Item_ID ='9'".format(u1)
+
+                x.execute(upd)
+                x.execute("SELECT * FROM Menu")
+                data = x.fetchall()
+                for i in data:
+                    print(i)
+                
+            if q>33:
+                print("This much quantity is not available")
+                for i in data:
+                    print(i)
+             
+        if ite==10:         #for item 10
+            if q<=29:
+                i1="SELECT * FROM Menu where Item_ID=10"
+                x.execute(i1)
+                r1=x.fetchone()
+                print(r1[3])
+                u1=r1[3] - q
+                print(u1)
+                pr=r1[2]*ite
+                total+=pr
+                 
+             
+#                 upd=f"UPDATE Menu SET Available_quantity={u1} WHERE Item_ID={1}"
+#                 upd="UPDATE Menu SET Available_quantity='u1' WHERE Item_ID = 1 "
+                upd = "UPDATE Menu SET Available_quantity='{}' WHERE Item_ID ='10'".format(u1)
+
+                x.execute(upd)
+                x.execute("SELECT * FROM Menu")
+                data = x.fetchall()
+                for i in data:
+                    print(i)
+                
+            if q>29:
+                print("This much quantity is not available")
+                for i in data:
+                    print(i)
+        print("Price till now : {0}".format(total))   
+            
+        if item=="done":
+            exit()
+            
+        
+                
+if c=="admin":
+    pw="iitd_1234"
+    p=getpass.getpass(prompt='Enter password : ')
+    if p.lower()=="iitd_1234":
+        print("Welcome admin!")
+        print("1.Fetch a bill")
+        print("2.Total revenue generated in last n days")
+        ch=input("Enter choice(1 /2) : ")
+    else:
+        print("Invalid password")
+        
+mydb.close()
