@@ -1,0 +1,1019 @@
+#: import FadeTransition kivy.uix.screenmanager.FadeTransition
+ScreenManagement:
+    transition: FadeTransition()
+    FirstScreen:
+    CustScreen:
+    EmpLoginScreen:
+    BankoptionScreen:
+    sbiScreen:
+    hdfcScreen:
+    iciciScreen:
+    createuserScreen:
+    deleteScreen:
+    forgetScreen:
+    changepwScreen:
+    updateScreen:
+    updaccountScreen:
+    seeaccountScreen:
+############################################################################################################################
+<FirstScreen>:
+    name: "first"
+    FloatLayout:
+    
+        canvas:
+            Rectangle:
+                source: "bank3.jpg"
+                size:self.size
+                pos:self.pos
+        Label:
+            text: "Welcome to Unified bank"
+            font_size: 65
+            color: 0.8,0.5,0.4,1
+            pos_hint: {"x":0,"y":0.4}
+        Button:
+            on_release: app.root.current = "employee"
+            text: "Employee"
+            font_size: 18
+            size_hint: 0.1,0.1
+            pos_hint: {"x": 0.5, "top" : 0.75 }
+            
+        Button:
+            on_release: app.root.current= "customer"
+            text: "Customer"
+            font_size: 18
+            size_hint: 0.1,0.1
+            pos_hint: {"x": 0.5, "top" : 0.50 }
+    
+##############################################################################################################################        
+
+<EmpLoginScreen>:
+    name: "employee"
+    userid : userid
+    passwd : passwd
+    FloatLayout:
+        canvas:
+            Rectangle:
+                source: "e.jpeg"
+                size:self.size
+                pos:self.pos
+        Label:
+            text: "Employee Login Screen"
+            size_hint: 0.8, 0.2
+            pos_hint: {"x":0.1, "top":1}
+            font_size: 60
+            color: 0.8,0.5,0.4,1
+
+        Label:
+            text:"User_id : "
+            pos_hint: {"x":0.1, "top":0.7}
+            font_size:40
+            size_hint: 0.35, 0.15
+            color: 0.8,0.5,0.4,1
+
+        TextInput:
+            id: userid
+            multiline: False
+            pos_hint: {"x": 0.45 , "top":0.7}
+            size_hint: 0.35, 0.10
+            font_size:40
+
+        Label:
+            text:"Password : "
+            pos_hint: {"x":0.1, "top":0.5}
+            size_hint: 0.35, 0.15
+            font_size:40
+            color: 0.8,0.5,0.4,1
+
+        TextInput:
+            id: passwd
+            multiline: False
+            password: True
+            pos_hint: {"x": 0.45, "top":0.5}
+            size_hint: 0.35, 0.10
+            font_size:40
+
+        Button:
+            pos_hint:{"x":0.2,"y":0.05}
+            size_hint: 0.25, 0.08
+            font_size: 18
+            text: "Login"
+            on_release: root.elogin()
+            #app.root.current="bankoption"
+            #root.manager.transition.direction = "up"
+
+        Button:
+            on_release: app.root.current= "first"
+            text: "Home"
+            font_size: 18
+            size_hint: 0.1,0.1
+            pos_hint: {"x": 0.001, "top" : 0.1 }
+   
+##############################################################################################################################
+
+<CustScreen>:
+    name: "customer"
+    accnum : accnum
+    passwd :passwd
+    FloatLayout:
+        canvas:
+            Rectangle:
+                source: "bank4.jpeg"
+                size:self.size
+                pos:self.pos
+        Label:
+            text:"Account number : "
+            #font_size: (root.width**2 + root.height**2) / 13**4
+            pos_hint: {"x":0.1, "top":0.9}
+            font_size:40
+            size_hint: 0.35, 0.15
+
+        TextInput:
+            id: accnum
+            #font_size: (root.width**2 + root.height**2) / 13**4
+            multiline: False
+            pos_hint: {"x": 0.45 , "top":0.9}
+            size_hint: 0.35, 0.15
+            font_size:40
+
+        Label:
+            text:"Password : "
+            #font_size: (root.width**2 + root.height**2) / 13**4
+            pos_hint: {"x":0.1, "top":0.7}
+            size_hint: 0.35, 0.15
+            font_size:40
+
+        TextInput:
+            id: passwd
+            #font_size: (root.width**2 + root.height**2) / 13**4
+            multiline: False
+            password: True
+            pos_hint: {"x": 0.45, "top":0.7}
+            size_hint: 0.4, 0.15
+            font_size:40
+
+        
+        Button:
+            pos_hint:{"x":0.2,"y":0.05}
+            size_hint: 0.25, 0.08
+            font_size: 18
+            #font_size: (root.width**2 + root.height**2) / 13**4
+            text: "Login"
+            on_release: root.login()
+            #app.root.current="bankoption"
+            #root.manager.transition.direction = "up"
+            
+
+        Button:
+            pos_hint:{"x":0.3,"y":0.3}
+            size_hint: 0.4, 0.1
+            font_size: 25
+            #font_size: (root.width**2 + root.height**2) / 17**4
+            text: "Don't have an Account? Create One"
+            on_release: app.root.current= "createuser"
+                #root.manager.transition.direction = "right"
+                #root.create()
+
+        Button:
+            on_release: app.root.current= "forget"
+            text: "Forgot password"
+            font_size: 14
+            size_hint:0.15,0.1
+            pos_hint: {"x":0.4, "top":0.5}
+        Button:
+            on_release: app.root.current= "first"
+            text: "Home"
+            font_size: 18
+            size_hint: 0.1,0.1
+            pos_hint: {"x": 0.001, "top" : 0.1 }
+#############################################################################################################################
+<BankoptionScreen>:
+    name: "bankoption"
+    FloatLayout:
+        canvas:
+            Rectangle:
+                source: "a.jpeg"
+                size:self.size
+                pos:self.pos
+        Button:
+            text: "SBI"
+            size_hint: 0.10,0.15
+            pos_hint: {"x":0.5, "top":0.2}
+            on_release: app.root.current="sbi"
+
+        Button:
+            text: "HDFC"
+            size_hint: 0.10,0.15
+            pos_hint: {"x":0.5, "top":0.5}
+            on_release: app.root.current="hdfc"
+
+        Button:
+            text: "ICICI"
+            size_hint: 0.10,0.15
+            pos_hint: {"x":0.5, "top":0.8}
+            on_release: app.root.current="icici"
+        Button:
+            on_release: app.root.current= "first"
+            text: "Home"
+            font_size: 18
+            size_hint: 0.1,0.1
+            pos_hint: {"x": 0.001, "top" : 0.1 }
+####################################################################################################################################
+<sbiScreen>:
+    name: "sbi"
+    FloatLayout:
+        canvas:
+            Rectangle:
+                source: "sbi.jpeg"
+                size:self.size
+                pos:self.pos
+        Button: 
+            text: "Delete Account from Bank"
+            size_hint: 0.10,0.15
+            pos_hint: {"x":0.5, "top":0.2}
+            on_release: app.root.current="delete"
+
+        Button:
+            text: "Check current balance"
+            size_hint: 0.10,0.15
+            pos_hint: {"x":0.5, "top":0.4}
+            on_release: app.root.current="currentbal"
+
+        Button:
+            text: "Last five transactions"
+            size_hint: 0.10,0.15
+            pos_hint: {"x":0.5, "top":0.6}
+            on_release: app.root.current="lastfive"
+        Button:
+            text: "Money transfer"
+            size_hint: 0.10,0.15
+            pos_hint: {"x":0.5, "top":0.8}
+            on_release: app.root.current="moneytransfer"
+        Button:
+            on_release: app.root.current= "first"
+            text: "Home"
+            font_size: 18
+            size_hint: 0.1,0.1
+            pos_hint: {"x": 0.001, "top" : 0.1 }
+        Button:
+            on_release: app.root.current= "bankoption"
+            text: "Back"
+            font_size: 18
+            size_hint: 0.1,0.1
+            pos_hint: {"x": 0.8, "top" : 0.1 }
+#####################################################################################################################################
+<hdfcScreen>:
+    name: "hdfc"
+    FloatLayout:
+        canvas:
+            Rectangle:
+                source: "hdfc.jpeg"
+                size:self.size
+                pos:self.pos
+        Button: 
+            text: "Delete Account from Bank"
+            size_hint: 0.10,0.15
+            pos_hint: {"x":0.5, "top":0.2}
+            on_release: app.root.current="delete"
+
+        Button:
+            text: "Check current balance"
+            size_hint: 0.10,0.15
+            pos_hint: {"x":0.5, "top":0.4}
+            on_release: app.root.current="currentbal"
+
+        Button:
+            text: "Last five transactions"
+            size_hint: 0.10,0.15
+            pos_hint: {"x":0.5, "top":0.6}
+            on_release: app.root.current="lastfive"
+        Button:
+            text: "Money transfer"
+            size_hint: 0.10,0.15
+            pos_hint: {"x":0.5, "top":0.8}
+            on_release: app.root.current="moneytransfer"
+        Button:
+            on_release: app.root.current= "first"
+            text: "Home"
+            font_size: 18
+            size_hint: 0.1,0.1
+            pos_hint: {"x": 0.001, "top" : 0.1 }
+        Button:
+            on_release: app.root.current= "bankoption"
+            text: "Back"
+            font_size: 18
+            size_hint: 0.1,0.1
+            pos_hint: {"x": 0.8, "top" : 0.1 }
+#######################################################################################################################################
+<iciciScreen>:
+    name: "icici"
+    FloatLayout:
+        canvas:
+            Rectangle:
+                source: "icici.jpeg"
+                size:self.size
+                pos:self.pos
+        Button: 
+            text: "Delete Account from Bank"
+            size_hint: 0.10,0.15
+            pos_hint: {"x":0.5, "top":0.2}
+            on_release: app.root.current="delete"
+
+        Button:
+            text: "Check current balance"
+            size_hint: 0.10,0.15
+            pos_hint: {"x":0.5, "top":0.4}
+            on_release: app.root.current="currentbal"
+
+        Button:
+            text: "Last five transactions"
+            size_hint: 0.10,0.15
+            pos_hint: {"x":0.5, "top":0.6}
+            on_release: app.root.current="lastfive"
+        Button:
+            text: "Money transfer"
+            size_hint: 0.10,0.15
+            pos_hint: {"x":0.5, "top":0.8}
+            on_release: app.root.current="moneytransfer"
+        Button:
+            on_release: app.root.current= "first"
+            text: "Home"
+            font_size: 18
+            size_hint: 0.1,0.1
+            pos_hint: {"x": 0.001, "top" : 0.1 }
+        Button:
+            on_release: app.root.current= "bankoption"
+            text: "Back"
+            font_size: 18
+            size_hint: 0.1,0.1
+            pos_hint: {"x": 0.8, "top" : 0.1 }
+#########################################################################################################################################
+<createuserScreen>:
+    name: "createuser"
+    namee : namee
+    dob : dob
+    address : address
+    country : country
+    bankname : bankname
+    mobno : mobno
+    passwd : passwd
+    bal : bal
+    FloatLayout:
+        canvas:
+            Rectangle:
+                source: "bank5.jpeg"
+                size:self.size
+                pos:self.pos
+        Label:
+            text: "Create an Account"
+            size_hint: 0.08, 0.02
+            color : 0,0.9,0.7,1
+            pos_hint: {"x":0.45, "top":1}
+            font_size: 50
+            #(root.width**2 + root.height**2) / 14**4
+
+        Label:
+            size_hint: 0.05,0.05
+            pos_hint: {"x":0.3, "top":0.9}
+            text: "Name: "
+            #font_size : 8
+            color : 0,0.9,0.7,1
+            font_size: 40
+
+        TextInput:
+            pos_hint: {"x":0.5, "top":0.9}
+            size_hint: 0.4, 0.12
+            id: namee
+            multiline: False
+            font_size: 40
+        Label:
+            size_hint: 0.5,0.12
+            pos_hint: {"x":0.10, "top":0.8}
+            text: "DOB (DDMMYYYY): "
+            font_size : 30
+            color : 0,0.9,0.7,1
+            #font_size: 40
+
+        TextInput:
+            pos_hint: {"x":0.5, "top":0.8}
+            size_hint: 0.4, 0.12
+            id: dob
+            multiline: False
+            font_size: 40
+        Label:
+            size_hint: 0.5,0.12
+            pos_hint: {"x":0.10, "top":0.7}
+            text: "Address : "
+            font_size: 30
+            color : 0,0.9,0.7,1
+
+        TextInput:
+            pos_hint: {"x":0.5, "top":0.7}
+            size_hint: 0.4, 0.12
+            id: address
+            multiline: False
+            font_size: 40
+        Label:
+            size_hint: 0.5,0.12
+            pos_hint: {"x":0.1, "top":0.6}
+            text: "Country: "
+            font_size: 30
+            color : 0,0.9,0.7,1
+
+        TextInput:
+            pos_hint: {"x":0.5, "top":0.6}
+            size_hint: 0.4, 0.12
+            id: country
+            multiline: False
+            font_size: 40
+        
+        Label:
+            size_hint: 0.5,0.12
+            pos_hint: {"x":0.10, "top":0.5}
+            text: "Bank : "
+            font_size: 30
+            color : 0,0.9,0.7,1
+
+
+        TextInput:
+            pos_hint: {"x":0.5, "top":0.5}
+            size_hint: 0.4, 0.12
+            id: bankname
+            multiline: False
+            font_size: 40
+        
+        Label:
+            size_hint: 0.5,0.12
+            pos_hint: {"x":0.1, "top":0.4}
+            text: "Mobile number: "
+            font_size:30
+            color : 0,0.9,0.7,1
+
+        TextInput:
+            pos_hint: {"x":0.5, "top":0.4}
+            size_hint: 0.4, 0.12
+            id: mobno
+            multiline: False
+            font_size: 40
+        Label:
+            size_hint: 0.5,0.12
+            pos_hint: {"x":0.1, "top":0.3}
+            text: "Create your login password: "
+            font_size: 30
+            color : 0,0.9,0.7,1
+
+        TextInput:
+            pos_hint: {"x":0.5, "top":0.3}
+            size_hint: 0.4, 0.12
+            id: passwd
+            multiline: False
+            password: True
+            font_size:40
+        Label:
+            size_hint: 0.5,0.12
+            pos_hint: {"x":0.1, "top":0.2}
+            text: "Balance deposited : "
+            font_size: 30
+            color : 0,0.9,0.7,1
+
+        TextInput:
+            pos_hint: {"x":0.5, "top":0.2}
+            size_hint: 0.4, 0.12
+            id: bal
+            multiline: False
+            password: True
+            font_size: 40
+        Button:
+            pos_hint:{"x":0.2,"y":0.01}
+            size_hint: 0.26, 0.1
+            font_size:30
+            text: "Already have an Account? Log In"
+            on_release: app.root.current="customer"
+                #root.manager.transition.direction = "left"
+                #root.login()
+
+        Button:
+            pos_hint:{"x":0.75,"y":0.01}
+            size_hint: 0.1, 0.1
+            text: "Submit"
+            font_size: 30
+            on_release: root.create()
+                #root.manager.transition.direction = "left"
+                
+        Button:
+            on_release: app.root.current= "first"
+            text: "Home"
+            font_size: 18
+            size_hint: 0.1,0.1
+            pos_hint: {"x": 0.001, "top" : 0.1 }
+#################################################################################################################################
+<deleteScreen>:
+    name: "delete"
+    dname : dname
+    dpasswd : dpasswd
+    FloatLayout:
+        Label:
+            text: "Delete Account from Bank"
+            size_hint: 0.8, 0.2
+            pos_hint: {"x":0.1, "top":1}
+            font_size: (root.width**2 + root.height**2) / 14**4
+
+        Label:
+            size_hint: 0.5,0.12
+            pos_hint: {"x":0, "top":0.8}
+            text: "Bank name : "
+            font_size: 40
+
+        TextInput:
+            pos_hint: {"x":0.5, "top":0.8}
+            size_hint: 0.4, 0.12
+            id: dname
+            multiline: False
+            font_size: 40
+
+        Label:
+            size_hint: 0.5,0.12
+            pos_hint: {"x":0, "top":0.8-0.13}
+            text: "Password : "
+            font_size: 40
+        TextInput:
+            pos_hint: {"x":0.5, "top":0.8-0.13}
+            size_hint: 0.4, 0.12
+            id: dpasswd
+            multiline: False
+            font_size: 40
+
+        Label:
+            size_hint: 0.5,0.12
+            pos_hint: {"x":0, "top":0.8-0.13*2}
+            text: "OTP : "
+            font_size: 40
+        TextInput:
+            pos_hint: {"x":0.5, "top":0.8-0.13*2}
+            size_hint: 0.4, 0.12
+            id: dotp
+            multiline: False
+            password: True
+            font_size:40
+        Button:
+            pos_hint:{"x":0.3,"y":0.25}
+            size_hint: 0.4, 0.1
+            font_size: 40
+            text: "Delete Account"
+            on_release:
+                root.manager.transition.direction = "left"
+                root.login()
+        Button:
+            on_release: app.root.current= "first"
+            text: "Home"
+            font_size: 18
+            size_hint: 0.1,0.1
+            pos_hint: {"x": 0.001, "top" : 0.1 }
+############################################################################################################################
+<currentbalScreen>:
+    name: "currentbalance"
+    accnum : accnum
+    balan : balan
+    FloatLayout:
+        Label:
+			text: "Account number :"
+			color : 1,1,0.30,1
+			font_size:24
+			pos_hint: {"x": 0.17, "y": 0.9}
+			size_hint : 0.3,0.04
+				
+        TextInput:
+        	id: accnum
+			pos_hint: {"x": 0.40, "y": 0.9}
+			size_hint : 0.3,0.04 
+			multiline: False  
+			font_size:22 
+		    write_tab: False
+    	Label:
+			text: "Balance"
+			color : 1,1,0.30,1
+			font_size:24
+			pos_hint: {"x": 0.17, "y": 0.85}
+			size_hint : 0.3,0.04
+				
+        Label:
+        	id: balan
+			pos_hint: {"x": 0.33, "y": 0.85}
+			size_hint : 0.3,0.04
+			multiline: False  
+            color : 1,1,0.30,1
+			font_size:22    	
+        Label:
+            text: "Current Balance"
+            size_hint: 0.8, 0.2
+            pos_hint: {"x":0.1, "top":1}
+            font_size: (root.width**2 + root.height**2) / 14**4
+        
+		Button:
+			pos_hint: {"x": .40, "y": 0.12}
+			size_hint : 0.10,0.04
+    		text: "Show Data"
+    		font_size:20
+    		background_color: 1, 0, 0, 0.6
+    		on_release : root.curbal()
+        Button:
+            on_release: app.root.current= "first"
+            text: "Home"
+            font_size: 18
+            size_hint: 0.1,0.1
+            pos_hint: {"x": 0.001, "top" : 0.1 }
+###############################################################################################################################
+<lastfiveScreen>:
+    name: "last"
+    FloatLayout:
+        Label:
+            text: "Last five transactions"
+            size_hint: 0.8, 0.2
+            pos_hint: {"x":0.1, "top":1}
+            font_size: (root.width**2 + root.height**2) / 14**4
+        Button:
+            on_release: app.root.current= "first"
+            text: "Home"
+            font_size: 18
+            size_hint: 0.1,0.1
+            pos_hint: {"x": 0.001, "top" : 0.1 }
+#################################################################################################################################
+<moneytransferScreen>:
+    name: "moneytransfer"
+    FloatLayout:
+        Label:
+            text: "Money Transfer"
+            size_hint: 0.8, 0.2
+            pos_hint: {"x":0.1, "top":1}
+            font_size: (root.width**2 + root.height**2) / 14**4
+        Button:
+            on_release: app.root.current= "first"
+            text: "Home"
+            font_size: 18
+            size_hint: 0.1,0.1
+            pos_hint: {"x": 0.001, "top" : 0.1 }
+
+##################################################################################################################################
+<forgetScreen>:
+    name:"forget"
+    accnum1 : accnum1
+    otpe : otpe
+    FloatLayout:
+        canvas:
+            Rectangle:
+                source: "key.jpeg"
+                size:self.size
+                pos:self.pos
+        Label:
+            size_hint: 0.5,0.12
+            pos_hint: {"x":0, "top":0.9}
+            text: "Enter Account number : "
+            font_size: 40
+
+        TextInput:
+            pos_hint: {"x":0.5, "top":0.9}
+            size_hint: 0.3, 0.10
+            id: accnum1
+            multiline: False
+            font_size:30
+        Button:
+            text: "Generate OTP"
+            font_size: 30
+            pos_hint: {"x":0.5,"top":0.75}
+            size_hint:0.3,0.10
+            on_release: root.otpg()
+        Label:
+            size_hint: 0.5,0.12
+            pos_hint: {"x":0, "top":0.6}
+            text: "Enter OTP : "
+            font_size: 40
+        TextInput:
+            pos_hint: {"x":0.5, "top":0.6}
+            size_hint: 0.3, 0.10
+            id: otpe
+            multiline: False
+            font_size:40
+        Button:
+            text: "Verify"
+            font_size: 30
+            pos_hint: {"x":0.5,"top":0.45}
+            size_hint:0.3,0.10
+            on_release: root.verify()
+
+        Button:
+            on_release: app.root.current= "first"
+            text: "Home"
+            font_size: 18
+            size_hint: 0.1,0.1
+            pos_hint: {"x": 0.001, "top" : 0.1 }
+###########################################################################################################################################################
+<changepwScreen>:
+    name : "change"
+    newpasswd : newpasswd
+    accnum2 : accnum2
+    FloatLayout:
+        canvas:
+            Rectangle:
+                source: "back.jpeg"
+                size:self.size
+                pos:self.pos
+        Label:
+            size_hint: 0.5,0.12
+            pos_hint: {"x":0, "top":0.9}
+            text: "Enter Account number : "
+            font_size: 40
+
+        TextInput:
+            pos_hint: {"x":0.5, "top":0.9}
+            size_hint: 0.3, 0.10
+            id: accnum2
+            multiline: False
+            font_size:30
+        Label:
+            size_hint: 0.5,0.12
+            pos_hint: {"x":0, "top":0.75}
+            text: "Enter new password : "
+            font_size: 40
+        TextInput:
+            pos_hint: {"x":0.5, "top":0.75}
+            size_hint: 0.3, 0.10
+            id: newpasswd
+            multiline: False
+            font_size:40
+        Button:
+            text: "Change password"
+            font_size: 30
+            pos_hint: {"x":0.5,"top":0.6}
+            size_hint:0.3,0.10
+            on_release: root.changepw()
+
+        Button:
+            on_release: app.root.current= "first"
+            text: "Home"
+            font_size: 18
+            size_hint: 0.1,0.1
+            pos_hint: {"x": 0.001, "top" : 0.1 }
+###########################################################################################################################################################
+
+<updateScreen>:
+    name : "update"
+    FloatLayout:
+        canvas:
+            Rectangle:
+                source: "q.jpg"
+                size:self.size
+                pos:self.pos
+        Button:
+            text: "Update Account details"
+            font_size: 40
+            pos_hint: {"x":0.5,"top":0.6}
+            size_hint:0.3,0.10
+            on_release: app.root.current= "upd"
+
+        Button:
+            on_release: app.root.current= "see"
+            text: "See Account Details"
+            font_size: 40
+            size_hint: 0.3,0.1
+            pos_hint: {"x": 0.5, "top" : 0.4 }
+        Button:
+            on_release: app.root.current= "first"
+            text: "Home"
+            font_size: 18
+            size_hint: 0.1,0.1
+            pos_hint: {"x": 0.001, "top" : 0.1 }
+################################################################################################################################################################
+<updaccountScreen>:
+    name : "upd"
+    accnum : accnum
+    address1 : address1
+    mobno1 : mobno1
+    dob1 : dob1
+   
+    FloatLayout:
+        canvas:
+            Rectangle:
+                source: "upd.jpeg"
+                size:self.size
+                pos:self.pos
+        Label:
+            text: "Enter details to edit"
+            size_hint: 0.08, 0.02
+            color : 0,0.9,0.7,1
+            pos_hint: {"x":0.45, "top":0.97}
+            font_size: 50
+
+        Label:
+            size_hint: 0.05,0.05
+            pos_hint: {"x":0.3, "top":0.9}
+            text: "Account number : "
+            #font_size : 8
+            color : 0,0.9,0.7,1
+            #font_size: (root.width**2 + root.height**2) / 14**4
+            font_size: 40
+
+        TextInput:
+            pos_hint: {"x":0.5, "top":0.9}
+            size_hint: 0.4, 0.12
+            id: accnum
+            multiline: False
+            font_size: 40
+        Label:
+            size_hint: 0.5,0.12
+            pos_hint: {"x":0.10, "top":0.8}
+            text: "DOB (DDMMYYYY): "
+            font_size : 30
+            color : 0,0.9,0.7,1
+            #font_size: (root.width**2 + root.height**2) / 14**4
+
+        TextInput:
+            pos_hint: {"x":0.5, "top":0.8}
+            size_hint: 0.4, 0.12
+            id: dob1
+            multiline: False
+            font_size: (root.width**2 + root.height**2) / 14**4
+        Label:
+            size_hint: 0.5,0.12
+            pos_hint: {"x":0.10, "top":0.7}
+            text: "Mobile number : "
+            font_size: 30
+            color : 0,0.9,0.7,1
+
+        TextInput:
+            pos_hint: {"x":0.5, "top":0.7}
+            size_hint: 0.4, 0.12
+            id: mobno1
+            multiline: False
+            font_size: (root.width**2 + root.height**2) / 14**4
+        Label:
+            size_hint: 0.5,0.12
+            pos_hint: {"x":0.10, "top":0.6}
+            text: "Address : "
+            font_size: 30
+            color : 0,0.9,0.7,1
+
+        TextInput:
+            pos_hint: {"x":0.5, "top":0.6}
+            size_hint: 0.4, 0.12
+            id: address1
+            multiline: False
+            font_size: (root.width**2 + root.height**2) / 14**4
+        
+        Button:
+            pos_hint:{"x":0.8,"y":0.05}
+            size_hint: 0.20, 0.08
+            text: "Submit"
+            font_size: 30
+            on_release: root.upda()
+                #root.manager.transition.direction = "left"
+                
+        Button:
+            on_release: app.root.current= "first"
+            text: "Home"
+            font_size: 18
+            size_hint: 0.1,0.1
+            pos_hint: {"x": 0.001, "top" : 0.1 }
+
+
+
+
+
+################################################################################################################################################################
+<seeaccountScreen>:
+    name : "see"
+    accnum : accnum
+    cname : cname
+    #dob :dob
+    address : address
+    coun : coun
+    bname: bname
+    mobnum : mobnum
+    balan : balan   
+    FloatLayout:
+        canvas:
+            Rectangle:
+                source: "see.jpeg"
+                size:self.size
+                pos:self.pos
+        Label:
+			text: "Account number :"
+			color : 1,1,0.30,1
+			font_size:24
+			pos_hint: {"x": 0.17, "y": 0.9}
+			size_hint : 0.3,0.04
+				
+        TextInput:
+        	id: accnum
+			pos_hint: {"x": 0.40, "y": 0.9}
+			size_hint : 0.3,0.04 
+			multiline: False  
+			font_size:22 
+		    write_tab: False
+    	Label:
+			text: "Name"
+			color : 1,1,0.30,1
+			font_size:24
+			pos_hint: {"x": 0.17, "y": 0.85}
+			size_hint : 0.3,0.04
+				
+        Label:
+        	id: cname
+			pos_hint: {"x": 0.33, "y": 0.85}
+			size_hint : 0.3,0.04
+			multiline: False  
+            color : 1,1,0.30,1
+			font_size:22    	
+    			
+    	Label:
+			text: " Address"
+			color : 1,1,0.30,1
+			font_size:24
+			pos_hint: {"x": 0.17, "y": 0.78}
+			size_hint : 0.3,0.04
+				
+        Label:
+        	id: address
+            color : 1,1,0.30,1
+			pos_hint: {"x": 0.33, "y": 0.78}
+			size_hint : 0.3,0.04 
+			multiline: False  
+			font_size:22 
+			
+			
+    	Label:
+			text: "Mobile number : "
+			color : 1,1,0.30,1
+			font_size:24
+			pos_hint: {"x": 0.17, "y": 0.71}
+			size_hint : 0.3,0.04
+				
+        Label:
+        	id: mobnum
+            color : 1,1,0.30,1
+			pos_hint: {"x": 0.33, "y": 0.71}
+			size_hint : 0.3,0.04 
+			multiline: False  
+			font_size:22 
+			
+			
+    	Label:
+			text: "Bank name :"
+			color : 1,1,0.30,1
+			font_size:24
+			pos_hint: {"x": 0.17, "y": 0.64}
+			size_hint : 0.3,0.04
+				
+        Label:
+        	id: bname
+            color : 1,1,0.30,1
+			pos_hint: {"x": 0.33, "y": 0.64}
+			size_hint : 0.3,0.04 
+			multiline: False  
+			font_size:22 
+			
+			
+    	Label:
+			text: "Country"
+			color : 1,1,0.30,1
+			font_size:24
+			pos_hint: {"x": 0.17, "y": 0.57}
+			size_hint : 0.3,0.04
+				
+        Label:
+        	id: coun
+            color : 1,1,0.30,1
+			pos_hint: {"x": 0.33, "y": 0.57}
+			size_hint : 0.3,0.04 
+			multiline: False  
+			font_size:22 
+    	
+    	Label:
+			text: "Balance : "
+			color : 1,1,0.30,1
+			font_size:24
+			pos_hint: {"x": 0.17, "y": 0.50}
+			size_hint : 0.3,0.04
+				
+        Label:
+        	id: balan
+			text:""
+            color : 1,1,0.30,1
+			pos_hint: {"x": 0.33, "y": 0.50}
+			size_hint : 0.3,0.04   
+			font_size:22 
+
+		Button:
+			pos_hint: {"x": .40, "y": 0.12}
+			size_hint : 0.10,0.04
+    		text: "Show Data"
+    		font_size:20
+    		background_color: 1, 0, 0, 0.6
+    		on_release : root.show() 
+        Button:
+            on_release: app.root.current= "first"
+            text: "Home"
+            font_size: 18
+            size_hint: 0.1,0.1
+            pos_hint: {"x": 0.001, "top" : 0.1 }
+            
+        
+        
