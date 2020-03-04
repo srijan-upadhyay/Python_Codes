@@ -1,0 +1,66 @@
+class student:          #Class definition
+    def __init__(self):
+        self
+        self.name=input("Enter your name : ")           #Taking runtime input
+        self.roll=input("Enter your roll number : ")
+class modify(student):
+    def __init__(self,name,roll):
+        print("New student created")
+#         self.nn=input("Enter new student name")
+        self.name=name
+        self.roll=roll
+#         self.marks=mar
+        mar=92
+        print("Present marks is {0}".format(mar))
+        mar=input("Enter updated marks : ")
+        print("Updated marks is {0}".format(mar))
+        
+        
+        
+x=input("Enter option (admin / student) : ")    #Taking input of whether student or admin
+
+if x=="admin":
+    y=input("Enter password : ")    #Admin password (iitd_1234)
+    if y=="iitd_1234":
+        print("Welcome admin!")
+        print("Enter option : 1.Add new student 2.Update total marks of a single student 3.show total marks of a single student")
+        q=input("Enter option (1/2/3) : ")  #User choice
+        if q=="1":
+#             n=input("Enter student name : ")
+#             m=n
+            m=student()         #object of class student
+#             print("{0}".format(n))
+#             m.name="n"
+#             print("{0}".format(m.name))
+          
+        if q=="2":
+            ob=student()    #object of class student
+            mark=0
+            print("Present marks is {0}".format(mark))  #printing present marks
+            mark=input("Enter updated marks : ")        #updated marks input by user
+            print("Displaying updated marks : {0}".format(mark))
+              
+        if q=="3":
+            ob=student()    #object of class student
+            mark=0
+            print("Displaying updated marks : {0}".format(mark))
+
+    if y!="iitd_1234":
+        print("Incorrect password")
+        
+if x=="student":
+    stud=student()
+    pw=input("Enter password to see marks : ")
+    if pw=="iitd_1234":
+        mark=34
+        print("Displaying updated marks : {0}".format(mark))
+    
+if x!="student":
+    if x!="admin":
+        print("Invalid option. Only student or admin can be entered.")
+    
+# modify()
+inp=input("Enter new student name : ")
+roll=input("Enter new student rill number")
+s=modify(inp,roll)
+
