@@ -1,0 +1,252 @@
+import pymysql
+import kivy
+import random
+from kivy.app import App
+from kivy.uix.label import Label
+from kivy.uix.gridlayout import GridLayout
+from kivy.uix.floatlayout import FloatLayout 
+from kivy.uix.button import Button
+from kivy.lang import Builder
+from kivy.core.window import Window
+from kivy.core.image import Image
+from kivy.uix.widget import Widget
+from kivy.uix.textinput import TextInput
+from kivy.properties import ObjectProperty
+from kivy.uix.screenmanager import ScreenManager, Screen, FadeTransition
+from kivy.graphics import Color, Rectangle
+from getpass import getpass
+from kivy.uix.popup import Popup
+
+#Establishing connection with database
+mydb = pymysql.connect(
+    host="localhost",
+    user="root",
+    passwd="12345",
+    database="banking"
+)
+#Setting the cursor
+x=mydb.cursor()
+
+# x.execute("SELECT * FROM user")
+# data = x.fetchall()
+# for i in data:
+#     print(i)
+
+#function for otp generation
+# def otpgen():
+#     otp=""
+#     for i in range(4):
+#         otp+=str(random.randint(0,9))
+#     return otp
+
+def accnumgen():
+    accnum=""
+    for i in range(10):
+        accnum+=str(random.randint(0,9))
+    return accnum
+#creating classes for different screens
+class FirstScreen(Screen):
+    pass
+
+class CustScreen(Screen):
+    accnum = ObjectProperty(None)
+    passwd = ObjectProperty(None)
+    def login(self):
+        d1="SELECT * FROM user where Account_number= %s"%(self.accnum.text)
+        x.execute(d1)
+        r1=x.fetchone()
+        # print(r1[2])
+        # print("{0}".format(r1[2]))
+        print(self.passwd.text)
+        print(self.accnum.text)
+        if self.passwd.text==r1[2]:         #Matching password from user and database
+            self.manager.current="bankoption"
+        if self.passwd.text!=r1[2]:
+            self.manager.current="customer"
+        # if self.accnum.text=="" and self.passwd.text=="":
+        #     self.manager.current="customer"
+
+
+    
+class LoginScreen(Screen):
+    pass
+class updateScreen(Screen):
+    pass
+class updaccountScreen(Screen):
+    accnum = ObjectProperty(None)
+    passwd = ObjectProperty(None)
+    address1 = ObjectProperty(None)
+    mobno1 = ObjectProperty(None)
+    dob1 = ObjectProperty(None)
+
+    def upda(self):
+        sql="UPDATE data4 SET dob=%s WHERE Account_number=%s"
+        x.execute(sql,(self.dob1.text, self.accnum.text))
+        mydb.commit()
+
+        sql="UPDATE data4 SET Address=%s WHERE Account_number=%s"
+        x.execute(sql,(self.address1.text, self.accnum.text))
+        mydb.commit()
+
+        sql="UPDATE data4 SET Mobile_number=%s WHERE Account_number=%s"
+        x.execute(sql,(self.mobno1.text, self.accnum.text))
+        mydb.commit()
+
+        ctime=datetime.datetime.now().time()
+        pop = Popup(title='Data updated',
+                  content=Label(text='Data updated at time {0}'.format(ctime)),
+                  size_hint=(None, None), size=(400, 400))
+        pop.open()
+
+
+class seeaccountScreen(Screen):
+    accnum = ObjectProperty(None)
+    cname = ObjectProperty(None)
+    dob = ObjectProperty(None)
+    address = ObjectProperty(None)
+    coun = ObjectProperty(None)
+    bname = ObjectProperty(None)
+    mobnum = ObjectProperty(None)
+    balan = ObjectProperty(None)
+    
+    def show(self,*args):
+        data="SELECT * FROM data4 WHERE Account_number=%s"
+        x.execute(data,(self.accnum.text))
+        dat=x.fetchone()
+
+        self.cname.text= str(dat[2])
+        print(self.cname.text)
+        #self.dob.text= str(dat[3])
+        self.address.text= str(dat[4])
+        self.coun.text= str(dat[5])
+        self.bname.text= str(dat[6])
+        self.mobnum.text= str(dat[7])
+        self.balan.text= str(dat[8])
+
+
+
+
+
+class EmpLoginScreen(Screen):
+    userid = ObjectProperty(None)
+    passwd = ObjectProperty(None)
+    def elogin(self):
+        d2="SELECT * FROM employee where User_id= %s"
+        x.execute(d2,(self.userid.text))
+        r2=x.fetchone()
+        print(r2[2])
+        print(self.userid.text)
+        print("{0}".format(self.passwd.text))
+        if self.passwd.text==r2[2]:
+            self.manager.current="update"
+        if self.passwd.text!=r2[2]:
+            self.manager.current="employee"
+        
+
+class ScreenManagement(ScreenManager):
+    pass
+class BankoptionScreen(Screen):
+    pass
+class sbiScreen(Screen):
+    pass
+class hdfcScreen(Screen):
+    pass
+class iciciScreen(Screen):
+    pass
+class createuserScreen(Screen):
+        def create(self):
+            namee = ObjectProperty(None)
+            dob = ObjectProperty(None)
+            address = ObjectProperty(None)
+            country = ObjectProperty(None)
+            bankname = ObjectProperty(None)
+            mobno = ObjectProperty(None)
+            passwd = ObjectProperty(None)
+            bal = ObjectProperty(None)
+
+            acc=accnumgen()
+            print(self.namee.text)
+            self.a=[self.ids.namee.text, self.ids.dob.text, self.ids.address.text, self.ids.country.text, self.ids.bankname.text, self.ids.mobno.text, self.ids.bal.text]
+            m=f"INSERT INTO data4 values('00',%s,'{self.a[0]}','{self.a[1]}','{self.a[2]}','{self.a[3]}','{self.a[4]}','{self.a[5]}','{self.a[6]}')"
+# VALUES
+            # val= [
+            # ('{0}','self.dob.text','self.address.text','self.country.text','self.bankname.text','self.mobno.text').format(self.namee.text)
+            # ]
+            x.execute(m,acc)
+            mydb.commit()
+
+            
+            # print(acc)
+
+            pop = Popup(title='New user registered',
+                  content=Label(text='Account number :{0}'.format(acc)),
+                  size_hint=(None, None), size=(400, 400))
+            pop.open()
+
+            self.b=[self.ids.passwd.text]
+            n=f"INSERT INTO user values('00',%s,%s)"
+            x.execute(n,(acc,self.passwd.text))
+            mydb.commit()
+class deleteScreen(Screen):
+    pass
+class currentbal(Screen):
+    balan = ObjectProperty(None)
+    accnum = ObjectProperty(None)
+    def curbal(self):
+        accnum = ObjectProperty(None)
+        data="SELECT * FROM data4 WHERE Account_number=%s"
+        x.execute(data,(self.accnum.text))
+        dat=x.fetchone()
+        self.balan.text= str(dat[8])
+
+class lastfive(Screen):
+    pass
+class moneytransferScreen(Screen):
+    pass
+class forgetScreen(Screen):
+    accnum1 = ObjectProperty(None)
+    otpe = ObjectProperty(None)
+    def otpg(self):
+        global otp
+        otp=""
+        for i in range(4):
+            otp+=str(random.randint(0,9))
+        pop = Popup(title='One Time Password',
+                content=Label(text='OTP :{0}'.format(otp)),
+                size_hint=(None, None), size=(400, 400))
+        pop.open()
+    def verify(self):
+        if self.otpe.text==otp:
+            self.manager.current="change"
+        else:
+            self.manager.current="first"
+class changepwScreen(Screen):
+    newpasswd = ObjectProperty(None)
+    accnum2 = ObjectProperty(None)
+    def changepw(self):
+        self.c=[self.ids.accnum2.text, self.ids.newpasswd.text]
+        sql="UPDATE user SET Password=%s WHERE Account_number=%s"
+        x.execute(sql,(self.newpasswd.text,self.accnum2.text))
+        # m=f"INSERT INTO user values('00','{self.c[0]}','{self.c[1]}')"
+# VALUES
+            # val= [
+            # ('{0}','self.dob.text','self.address.text','self.country.text','self.bankname.text','self.mobno.text').format(self.namee.text)
+            # ]
+        # x.execute(m)
+        mydb.commit()
+        pop= Popup(title='Password changed',
+                content=Label(text='Press Home. You can login with your new password.'),
+                size_hint=(None, None), size=(400, 400))
+        pop.open()
+
+        
+
+presentation = Builder.load_file("my.kv")
+
+class MyMainApp(App):
+    def build(self):
+        return presentation
+
+
+if __name__ == "__main__":
+    MyMainApp().run()
